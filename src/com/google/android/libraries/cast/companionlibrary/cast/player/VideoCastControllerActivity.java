@@ -84,6 +84,7 @@ public class VideoCastControllerActivity extends ActionBarActivity implements
     private TextView mStart;
     private TextView mEnd;
     private SeekBar mSeekbar;
+    private TextView mline1;
     private TextView mLine2;
     private ProgressBar mLoading;
     private double mVolumeIncrement;
@@ -171,6 +172,7 @@ public class VideoCastControllerActivity extends ActionBarActivity implements
         mStart = (TextView) findViewById(R.id.start_text);
         mEnd = (TextView) findViewById(R.id.end_text);
         mSeekbar = (SeekBar) findViewById(R.id.seekbar);
+        mline1 = (TextView) findViewById(R.id.textview1);
         mLine2 = (TextView) findViewById(R.id.textview2);
         mLoading = (ProgressBar) findViewById(R.id.progressbar1);
         mControllers = findViewById(R.id.controllers);
@@ -390,7 +392,7 @@ public class VideoCastControllerActivity extends ActionBarActivity implements
                     mPlayPause.setImageDrawable(mPauseDrawable);
                 }
 
-                mLine2.setText(getString(R.string.ccl_casting_to_device,
+                mToolbar.setTitle(getString(R.string.ccl_casting_to_device,
                         mCastManager.getDeviceName()));
                 mControllers.setVisibility(View.VISIBLE);
                 break;
@@ -399,20 +401,20 @@ public class VideoCastControllerActivity extends ActionBarActivity implements
                 mLoading.setVisibility(View.INVISIBLE);
                 mPlaybackControls.setVisibility(View.VISIBLE);
                 mPlayPause.setImageDrawable(mPlayDrawable);
-                mLine2.setText(getString(R.string.ccl_casting_to_device,
+                mToolbar.setTitle(getString(R.string.ccl_casting_to_device,
                         mCastManager.getDeviceName()));
                 break;
             case MediaStatus.PLAYER_STATE_IDLE:
                 mLoading.setVisibility(View.INVISIBLE);
                 mPlayPause.setImageDrawable(mPlayDrawable);
                 mPlaybackControls.setVisibility(View.VISIBLE);
-                mLine2.setText(getString(R.string.ccl_casting_to_device,
+                mToolbar.setTitle(getString(R.string.ccl_casting_to_device,
                         mCastManager.getDeviceName()));
                 break;
             case MediaStatus.PLAYER_STATE_BUFFERING:
                 mPlaybackControls.setVisibility(View.INVISIBLE);
                 mLoading.setVisibility(View.VISIBLE);
-                mLine2.setText(getString(R.string.ccl_loading));
+                mToolbar.setTitle(getString(R.string.ccl_loading));
                 break;
             default:
         }
@@ -440,12 +442,12 @@ public class VideoCastControllerActivity extends ActionBarActivity implements
 
     @Override
     public void setTitle(String text) {
-        mToolbar.setTitle(text);
+        mline1.setText(text);
     }
 
     @Override
     public void setSubTitle(String text) {
-        mLine2.setText(text);
+        mToolbar.setTitle(text);
     }
 
     @Override
